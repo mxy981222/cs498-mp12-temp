@@ -29,22 +29,22 @@ def get_config():
 @app.route('/img-classification/free',methods=['POST'])
 def post_free():
     # your code here
-    # req = request.get_json(force=True)
-    # dataset = req['dataset']
-    dataset = "mnist"
+    req = request.get_json(force=True)
+    dataset = req['dataset']
+    # dataset = "mnist"
 
     env = [
         client.V1EnvVar(name = "DATASET", value = dataset),
         client.V1EnvVar(name = "TYPE", value = "ff")   
     ]
 
-    # resources = client.V1ResourceRequirements(limits = {"cpu","0.9"},requests = {"cpu","0.9"})
+    resources = client.V1ResourceRequirements(limits = {"cpu":"0.9"},requests = {"cpu":"0.9"})
     
     container = client.V1Container(
         name = "free-job",
         image = "mxy981222/mp12",
         env = env,
-        # resources = resources
+        resources = resources
     )
     
     # https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1Job.md
@@ -65,16 +65,16 @@ def post_free():
 @app.route('/img-classification/premium', methods=['POST'])
 def post_premium():
     # your code here
-    # req = request.get_json(force=True)
-    # dataset = req['dataset']
-    dataset = "mnist"
+    req = request.get_json(force=True)
+    dataset = req['dataset']
+    # dataset = "mnist"
 
     env = [
         client.V1EnvVar(name = "DATASET", value = dataset),
         client.V1EnvVar(name = "TYPE", value = "cnn")   
     ]
     
-    resources = client.V1ResourceRequirements(limits = {"cpu","0.9"},requests = {"cpu","0.9"})
+    resources = client.V1ResourceRequirements(limits = {"cpu":"0.9"},requests = {"cpu":"0.9"})
     
     container = client.V1Container(
         name = "free-job",
