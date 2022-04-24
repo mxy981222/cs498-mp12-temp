@@ -29,8 +29,9 @@ def get_config():
 @app.route('/img-classification/free',methods=['POST'])
 def post_free():
     # your code here
-    req = request.get_json(force=True)
-    dataset = req['dataset']
+    # req = request.get_json(force=True)
+    # dataset = req['dataset']
+    dataset = "mnist"
 
     env = [
         client.V1EnvVar(name = "DATASET", value = dataset),
@@ -64,8 +65,9 @@ def post_free():
 @app.route('/img-classification/premium', methods=['POST'])
 def post_premium():
     # your code here
-    req = request.get_json(force=True)
-    dataset = req['dataset']
+    # req = request.get_json(force=True)
+    # dataset = req['dataset']
+    dataset = "mnist"
 
     env = [
         client.V1EnvVar(name = "DATASET", value = dataset),
