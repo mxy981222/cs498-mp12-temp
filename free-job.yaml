@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: mp12-free
+  namespace: free-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: mp12-free
+          image: mxy981222/mp12
+          resources:
+            limits:
+              cpu: "0.9"
+            requests:
+              cpu: "0.9"
+          env:
+            - name: DATASET
+              value: "mnist"
+            - name: TYPE
+              value: "ff"
+          command: ["python3","classify.py"]
+      restartPolicy: Never
+  backoffLimit: 4
