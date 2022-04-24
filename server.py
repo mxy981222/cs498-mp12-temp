@@ -8,6 +8,7 @@ import json
 # Configs can be set in Configuration class directly or using helper utility
 config.load_kube_config()
 v1 = client.CoreV1Api()
+# api = client.ApiClient(client.Configuration())
 v2 = client.BatchV1Api()
 app = Flask(__name__)
 # app.run(debug = True)
@@ -36,13 +37,13 @@ def post_free():
         client.V1EnvVar(name = "TYPE", value = "ff")   
     ]
 
-    resources = client.V1ResourceRequirements(limits = {"cpu","0.9"},requests = {"cpu","0.9"})
+    # resources = client.V1ResourceRequirements(limits = {"cpu","0.9"},requests = {"cpu","0.9"})
     
     container = client.V1Container(
         name = "free-job",
         image = "mxy981222/mp12",
         env = env,
-        resources = resources
+        # resources = resources
     )
     
     # https://github.com/kubernetes-client/python/blob/master/kubernetes/docs/V1Job.md
